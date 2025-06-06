@@ -41,7 +41,7 @@ service:
       checksEnabled: false
 
 ingress:
-  enabled: true
+  enabled: false
   ingressClassName: "nginx"
   additionalLabels: {}
   annotations: 
@@ -156,20 +156,20 @@ persistence:
   annotations: {}
   # storageVolumeName: qdrant-storage
   # storageSubPath: ""
-  # storageClassName: local-path
+  storageClassName: local-storage
 
 # If you use snapshots or the snapshot shard transfer mechanism, we recommend
 # creating a separate volume of the same size as your main volume so that your
 # cluster won't crash if the snapshot is too big.
 snapshotPersistence:
-  enabled: false
+  enabled: true
   accessModes: ["ReadWriteOnce"]
-  size: 10Gi
+  size: 20Gi
   annotations: {}
   # snapshotsVolumeName: qdrant-snapshots
   # snapshotsSubPath: ""
   # You can change the storageClassName to ensure snapshots are saved to cold storage.
-  # storageClassName: local-path
+  storageClassName: local-storage
 
 snapshotRestoration:
   enabled: false
@@ -254,7 +254,7 @@ podDisruptionBudget:
 #     name:
 #     key:
 # apiKey: false
-
+apiKey: "a05cece8-7fce-4e60-972e-b28ece45cf3c"
 # read-only api key for authentication at qdrant
 # false: no read-only api key will be configured
 # true: an read-only api key will be auto-generated
